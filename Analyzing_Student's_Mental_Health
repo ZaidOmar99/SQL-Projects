@@ -1,0 +1,19 @@
+-- Select the length of stay for international students
+SELECT stay,
+       -- Count how many international students for each length of stay
+       COUNT(*) AS count_int, 
+       -- Calculate the average PHQ-9 (todep) score, rounded to 2 decimals
+       ROUND(AVG(todep), 2) AS average_phq,
+       -- Calculate the average SCS (tosc) score, rounded to 2 decimals
+       ROUND(AVG(tosc), 2) AS average_scs,
+       -- Calculate the average ASISS (toas) score, rounded to 2 decimals
+       ROUND(AVG(toas), 2) AS average_as
+FROM students
+    -- Only include international students
+    WHERE inter_dom = 'Inter'
+-- Group results by length of stay
+GROUP BY stay
+-- Order results by stay in descending order (highest stay first)
+ORDER BY stay DESC
+-- Limit results to the top 9 rows
+LIMIT 9;
